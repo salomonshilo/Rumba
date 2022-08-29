@@ -22,7 +22,7 @@ const userInfo = {
     userId: data.id,
     userName: data.display_name,
 };
-
+console.log(userInfo);
 dispatch({type:reducerCases.SET_USER,userInfo});
 }; 
     getUserInfo();
@@ -61,8 +61,8 @@ background-color: #700086;
 .body{
     height: 100%;
     width: 100%;
-    overflow: hidden;
-    display: grid:
+    overflow: auto;
+   
 }
 }
 `;

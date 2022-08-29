@@ -96,9 +96,21 @@ export default function Body() {
                        
                      </div>
                      <div className='col detail'>
+                     <div className='image'>
                          <img src={image} />
                        </div>
-                       
+                       <div className='info'>
+                         <span className='name'>{name} </span>
+                         <span>{artists} </span>
+
+                       </div>
+                       </div>
+                       <div className='col'>
+                         <span> {album} </span>
+                       </div>
+                       <div className='col'>
+                         <span>{duration} </span>
+                       </div>
                    </div>
                  )
              })}
@@ -112,5 +124,72 @@ export default function Body() {
 
 const Container = styled.div `
 
+.playlist{
+    margin:0 2rem;
+    display:flex;
+    align-items:center;
+    gap:2rem;
+    .image{
+        img{
+            height:15rem;
+            box-shadow:rgba (0,0,0,0.25) 0px 25px 50px -12 ;
+        }
+    }
+    .details{
+        display:flex;
+        flex-direction:column;
+        gap:2rem;
+        color:#e0dede;
+    }
+    .title{
+        color:white;
+         font-size:4rem;
+     }
+    }
+}
+.list{
+    .header_row{
+        display:grid;
+        grid-template-columns:0.3fr 3fr 2fr 0.1fr;
+        margin:1rem 0 0 0;
+        position:sticky;
+        top:15vh;
+        padding:1rem 2rem;
+        color:white;
+        transition:0.3s ease-in-out;
+     background-color: ${({headerBackground})=>headerBackground ? "#000000":"none"};
+    }
+    .tracks{
+        margin:0 2rem;
+        display:flex;
+        flex-direction:column;
+        margin-bottom:5rem;
+        .row{
+            padding:0.5rem 1rem;
+            display:grid;
+            grid-template-columns:0.3fr 3.1fr 2fr 0.1fr;
+            &:hover{
+                background-color:#ff7800;
+            }
+            .col{
+                display:flex;
+                align-items:center;
+                color:#adacdc;
+            }
+            .image{
+                height:40px;
+                width:40px;
+            }
+            .detail{
+                display:flex;
+                gap:1rem;
+            }
+            .info{
+                display:flex;
+                flex-direction:column;
+            }
+        }
+    }
+}
 `;
 

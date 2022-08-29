@@ -3,7 +3,7 @@ import styled from "styled-components"
 export default function Login() {
     const handleClick = () => {
         const clientId = 'aef216cee1674edc82878c9becfe5f47';
-        const redirectUrl = "http://localhost:3001/";
+        const redirectUrl = "http://localhost:3000/";
         const apiUrl = "https://accounts.spotify.com/authorize";
         const scope = [
             "user-read-email",
@@ -17,12 +17,12 @@ export default function Login() {
         ];
         window.location.href = `${apiUrl}?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=${scope.join(
             " "
-            )}&response_type=token&show_daialog=true`;
+            )}&response_type=token&show_dialog=true`;
         
     };
   return <Container>
-   <h1>la musique ilimitée</h1>
-    <img src='https://www.pngkey.com/png/detail/14-144659_download-png-image-report-transparent-background-music-png.png'/>
+   <h1>Ecouter de la musique en continue grace à Rumba c’est fun et c’est cool , Evadez vous!!</h1>
+    
 
       <button onClick={handleClick}>Se connecter à Rumba</button>
      
@@ -32,17 +32,23 @@ export default function Login() {
 const Container = styled.div`
 display: flex;
 flex-direction: column;
+
+
 align-items: center;
 justify-content: center;
 
-img{
-    width:30%
-}
+
+
 button{
     padding: 1rem 5rem ;
     border-radius: 5rem;
     cursor: pointer;
     font-size: 1rem;
+    margin-top: 480px;
+}
+h1{
+    color: white;
+    margin: 20px 90px;
 }
 
 

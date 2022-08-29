@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('https://wallpaperset.com/w/full/0/3/f/466996.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 
 code {

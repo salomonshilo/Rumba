@@ -5,7 +5,7 @@ import axios from "axios";
 import { reducerCases } from '../utils/constant';
 import styled from 'styled-components';
 export default function Playlist() {
-   const [{ token, playlists }, dispatch ]= useStateProvider();
+   const [{ token, playlists,contextUri }, dispatch ]= useStateProvider();
     useEffect (()=>{
         const getPlaylistData = async () =>{
             const response = await axios.get('https://api.spotify.com/v1/me/playlists', {
@@ -15,6 +15,7 @@ export default function Playlist() {
                 },
             }
         );
+        console.log(response.data)
             const { items } = response.data;
             const playlists = items.map(({ name, id }) => {
                 return { name, id };
@@ -23,10 +24,10 @@ export default function Playlist() {
              
         };
         getPlaylistData();
-    }, [token, dispatch])
+    }, [token, contextUri,dispatch])
   return (<Container>
       <ul>
-          {playlists.map(({name,id})=>{
+          {playlists.map(({name,id,contextUri})=>{
              return <li key={id}>{name}</li>;
             })}
             

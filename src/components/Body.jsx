@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import { useEffect} from 'react'
 import styled from 'styled-components';
 import {AiFillClockCircle} from "react-icons/ai";
 import { useStateProvider } from '../utils/StateProvider';
@@ -7,7 +7,7 @@ import { reducerCases } from '../utils/constant';
 
 export default function Body() {
 
-  const [{ token,selectedPlaylistId, selectedPlaylist }, dispatch]= useStateProvider();
+  const [{ token,selectedPlaylistId,contextUri, selectedPlaylist }, dispatch]= useStateProvider();
   useEffect(()=>{
     const getInitialPlaylist = async ()=>{
         const response = await axios.get(`https://api.spotify.com/v1/playlists/${selectedPlaylistId}`, 
@@ -32,7 +32,7 @@ export default function Body() {
       image: track.album.images[2].url,
       duration: track.duration_ms,
       album: track.album.name,
-      context_uri: track.album.uri,
+      contextUri: track.album.uri,
       track_number: track.track_number,
     })),
    
@@ -41,7 +41,7 @@ export default function Body() {
 
  };
  getInitialPlaylist();
-  },[token, dispatch,selectedPlaylistId])
+  },[token, dispatch,contextUri,, selectedPlaylistId])
   return <Container>
 {
   selectedPlaylist && (
@@ -84,13 +84,22 @@ export default function Body() {
                 image,
                 duration,
                 album,
-                context_uri,
+                contextUri,
                 track_number,
                 },
                 index
                 )=> {
                  return(
-                   <div className='row' key={id}>
+                  <div className="row"
+                        key={id}
+                        onClick={() => {
+                          dispatch({
+                            type:reducerCases.SET_CONTEXT_URI,
+                            contextUri,
+                          });
+                          console.log(contextUri);
+                        }}
+                      >
                      <div className='col'>
                        <span>{index+1} </span>
                        
@@ -138,7 +147,7 @@ const Container = styled.div `
     .details{
         display:flex;
         flex-direction:column;
-        gap:2rem;
+        gap:1rem;
         color:#e0dede;
     }
     .title{
@@ -148,7 +157,7 @@ const Container = styled.div `
     }
 }
 .list{
-    .header_row{
+    .header{
         display:grid;
         grid-template-columns:0.3fr 3fr 2fr 0.1fr;
         margin:1rem 0 0 0;
@@ -160,7 +169,7 @@ const Container = styled.div `
      background-color: ${({headerBackground})=>headerBackground ? "#000000":"none"};
     }
     .tracks{
-        margin:0 2rem;
+        margin: 0 2rem;
         display:flex;
         flex-direction:column;
         margin-bottom:5rem;
@@ -169,7 +178,8 @@ const Container = styled.div `
             display:grid;
             grid-template-columns:0.3fr 3.1fr 2fr 0.1fr;
             &:hover{
-                background-color:#ff7800;
+                background-color:#340039;
+                cursor:pointer;
             }
             .col{
                 display:flex;
@@ -178,7 +188,8 @@ const Container = styled.div `
             }
             .image{
                 height:40px;
-                width:40px;
+                margin: 10px;
+               
             }
             .detail{
                 display:flex;
